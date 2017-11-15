@@ -6,3 +6,23 @@ body {
   background-color: #2b2f3e;
   color: #ffffee;
 }
+
+
+.radio {
+  width: 500px;
+  margin: auto;
+  display:block;
+}
+
+.pull-left {
+  float: left;
+}
+
+
+.channel {
+  border-bottom: 1px solid #000;
+  display: block;
+  
+}
+
+

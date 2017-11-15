@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './data.js';
-import './App.css';
 
 //import Channels from './Channels';
 import registerServiceWorker from './registerServiceWorker';
