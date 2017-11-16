@@ -117,7 +117,7 @@ function ChannelList(props) {
 
 	props.channels.forEach(function(channel) {
 		list.push(
-			<div key={channel.id} className="channel" onClick={change_channel}>
+			<div key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
 				<img src={channel.image} alt={channel.title} className="pull-left" />
 				<h3>{channel.title}</h3>
 				<p>{channel.description}</p>
@@ -127,8 +127,14 @@ function ChannelList(props) {
 		);
 	})
 
-	function change_channel(test) {
-		console.log(test.target);
+	function change_channel(click) {
+
+		// Get the data-id of the clicked channel
+		var channel = click.currentTarget.getAttribute("data-id");
+
+		// Use parent function to update channel state
+		props.change_channel(channel);
+
 	}
 
 	return (
@@ -194,11 +200,35 @@ class Radio extends React.Component {
 			channels: window.channels.channels,
 			audioCtx: new AudioContext(),
 			audio: new Audio(),
+			now_playing: "",
+
 		};
 		//console.log(this.state.channels);
 
+		// keeps *this* usable in other methods
+    	this.change_channel = this.change_channel.bind(this);
+
 		this.state.audio.src = "http://ice1.somafm.com/groovesalad-128-mp3";
 	}
+
+
+	change_channel(channel_id) {
+
+
+		// Search channels for matching id
+		var playing = this.state.channels.find(
+			channel => channel.id == channel_id
+		);
+		console.log(playing);
+
+		this.setState({
+			now_playing: channel_id
+		});
+
+		this.state.audio.src = playing.url;
+
+	}
+
 
 
 	render() {
@@ -218,7 +248,10 @@ class Radio extends React.Component {
 
 			<hr />
 
-			<ChannelList channels={this.state.channels} />
+			<ChannelList 
+				channels={this.state.channels}
+				change_channel={this.change_channel}
+			 />
 
 
 	    </div>
