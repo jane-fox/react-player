@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './data.js';
+import axios from "axios";
 
 //import Channels from './Channels';
 import registerServiceWorker from './registerServiceWorker';
@@ -188,7 +189,7 @@ function Controls(props) {
 
 
 
-
+// This acts as a controller for the rest of the app
 class Radio extends React.Component {
 
 	constructor(props) {
@@ -214,20 +215,57 @@ class Radio extends React.Component {
 
 	change_channel(channel_id) {
 
+		var self = this;
+
 
 		// Search channels for matching id
-		var playing = this.state.channels.find(
+		var new_channel = this.state.channels.find(
 			channel => channel.id == channel_id
 		);
-		console.log(playing);
+		//console.log(new_channel);
+
+		// TODO quality picker in options
+		var playlist = new_channel.playlists.find(
+			list => list.quality == "high"
+		);
+
+
+
+		console.log(playlist);
+
+		axios.get(playlist.url)
+			.then(function (response) {
+				//console.log(response);
+
+				// We get an array of xml from this
+				var data = response.data.split('\n');
+
+				// Just need the file from it
+				var file = data.find(
+					item => item.indexOf("File1") > -1
+				);
+
+				// Removes the File1= from string
+				var real_url = file.split("File1=")[1];
+
+				self.state.audio.src = real_url;
+				self.state.audio.play();
+
+			})
+			.catch(function (error) {
+				console.warn(error);
+			});
+
+
+		//console.log(test);
 
 		this.setState({
 			now_playing: channel_id
 		});
 
-		this.state.audio.src = playing.url;
 
 	}
+
 
 
 
