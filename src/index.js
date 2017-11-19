@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './css/index.css';
+import './css/icon.css';
+import './css/material-icons.min.css';
 import './data.js';
 import axios from "axios";
+import "material-icons";
 
 //import Channels from './Channels';
 import registerServiceWorker from './registerServiceWorker';
@@ -14,7 +17,7 @@ function Tracker() {
 
 	return (
 		<div>
-			<div>Tracking</div>
+			<div>Seeking</div>
 			<div>0:00</div>
 		</div>
 	);
@@ -179,9 +182,12 @@ function Controls(props) {
 
 	return (
 		<div>
-			<button className="control-button big" onClick={play}>Play</button>
-			<button className="control-button big" onClick={pause}>Pause</button>
-			<p>Volume</p>
+			<button className="control-button big" onClick={play}>
+				<i className="mi mi-play-circle-outline"></i>
+			</button>
+			<button className="control-button big" onClick={pause}>
+				<i className="mi mi-pause-circle-outline"></i>
+			</button>
 		</div>
 	);
 }
@@ -297,6 +303,7 @@ class Radio extends React.Component {
 	  </main>
 	);
 	}
+
 
 
 
