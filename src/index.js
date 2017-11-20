@@ -7,8 +7,12 @@ import './data.js';
 import axios from "axios";
 import "material-icons";
 
+import ChannelList from "./Channels";
+import Visualizer from "./Visualizer";
+
 //import Channels from './Channels';
 import registerServiceWorker from './registerServiceWorker';
+
 
 
 
@@ -33,121 +37,9 @@ function NowPlaying(props) {
 	);
 }
 
-class Visualizer extends React.Component {
-
-	constructor(props) {
-		super(props);
-	}
-
-	// Change size of canvas
-	size_player() {
-
-		var vis_width = window.innerWidth;
-		var vis_height = 100;
-
-/*
-		audioSource = audioCtx.createMediaElementSource(audio);
-		audioSource.connect(analyser);
-		audioSource.connect(audioCtx.destination);
-    
-*/
-		var canvas = document.getElementById("visualizer");
-
-		canvas.height = vis_height;
-		canvas.width = vis_width;
-	} // size_player()
-
-
-	// Draw visualizer
-	draw(props) {
-
-		var canvas = document.getElementById("visualizer");
-		var ctx = canvas.getContext("2d");
-		var bufferLength, dataArray;
-
-		//ctx.clearRect(0, 0, vis_width, vis_height);
-		ctx.clearRect(0, 0, 200, 80);
-
-		var analyser = props.audioCtx.createAnalyser();
-		analyser.fftsize = 256;
-
-		bufferLength = analyser.frequencyBinCount;
-		dataArray = new Uint8Array(bufferLength);
-		analyser.getByteTimeDomainData(dataArray);
-
-		analyser.getByteFrequencyData(dataArray);
-
-		var barWidth = 1;
-		//var barWidth = (10 / bufferLength) * 2.5;
-		var barHeight;
-		var x = 0;
 
 
 
-		for(var i = 0; i < bufferLength; i++) {
-		    barHeight = dataArray[i]/2;
-
-			//ctx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-		    ctx.fillStyle = '#FF5f00';
-		    ctx.fillRect(x, 0, barWidth, barHeight/2 );
-
-		    x += barWidth + 1;
-		  }
-
-		requestAnimationFrame(this.draw);
-
-	} // draw()
-
-	render() {
-	return (
-		<div>
-			<canvas id="visualizer"></canvas>
-		</div>
-	);
-	}
-
-	componentDidMount() {
-		//this.draw();
-	}
-
-}
-
-
-function ChannelList(props) {
-
-	const list = [];
-
-	//console.log(props);
-
-	props.channels.forEach(function(channel) {
-		list.push(
-			<div key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
-				<img src={channel.image} alt={channel.title} className="pull-left" />
-				<h3>{channel.title}</h3>
-				<p>{channel.description}</p>
-				<p>{channel.genre}</p>
-				<p>{channel.listeners} listeners</p>
-			</div>
-		);
-	})
-
-	function change_channel(click) {
-
-		// Get the data-id of the clicked channel
-		var channel = click.currentTarget.getAttribute("data-id");
-
-		// Use parent function to update channel state
-		props.change_channel(channel);
-
-	}
-
-	return (
-		<div>
-			<h3>Channels</h3>
-			<div>{list}</div>
-		</div>
-	);
-}
 /*
 "id": "7soul",
 		"title": "Seven Inch Soul",
