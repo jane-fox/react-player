@@ -14,32 +14,6 @@ import Visualizer from "./Visualizer";
 import registerServiceWorker from './registerServiceWorker';
 
 
-
-
-
-function Tracker() {
-
-	return (
-		<div>
-			<div>Seeking</div>
-			<div>0:00</div>
-		</div>
-	);
-}
-
-function NowPlaying(props) {
-
-	return (
-		<div>
-			<h2>Now Playing</h2>
-			<div>{props.title}</div>
-		</div>
-	);
-}
-
-
-
-
 /*
 "id": "7soul",
 		"title": "Seven Inch Soul",
@@ -62,22 +36,25 @@ function NowPlaying(props) {
 		"lastPlaying": "The Dells - Your Song"
 */
 
-function Controls(props) {
 
-	function play() {
-		props.audio.play();
-	}
 
-	function pause() {
-		props.audio.pause();
-	}
-
+function NowPlaying(props) {
 	return (
 		<div>
-			<button className="control-button big" onClick={play}>
+			<h2>Now Playing</h2>
+			<div>{props.title}</div>
+		</div>
+	);
+}
+
+
+function Controls(props) {
+	return (
+		<div>
+			<button className="control-button big" onClick={props.play}>
 				<i className="mi mi-play-circle-outline"></i>
 			</button>
-			<button className="control-button big" onClick={pause}>
+			<button className="control-button big" onClick={props.pause}>
 				<i className="mi mi-pause-circle-outline"></i>
 			</button>
 		</div>
@@ -104,8 +81,13 @@ class Radio extends React.Component {
 		};
 		//console.log(this.state.channels);
 
+		// Listens for keys on entire page
+		document.onkeypress = this.handleKeyPress;
+
 		// keeps *this* usable in other methods
     	this.change_channel = this.change_channel.bind(this);
+    	this.play = this.play.bind(this);
+    	this.pause = this.pause.bind(this);
 
 		this.state.audio.src = "http://ice1.somafm.com/groovesalad-128-mp3";
 	}
@@ -165,6 +147,22 @@ class Radio extends React.Component {
 	}
 
 
+	handleKeyPress(event) {
+		console.log(event);
+
+		if(event.key == ' ' || event.code == "Space"){
+			console.log("yup");
+		}
+	}
+
+
+	play() {
+		this.state.audio.play();
+	}
+
+	pause() {
+		this.state.audio.pause();
+	}
 
 
 	render() {
@@ -174,12 +172,14 @@ class Radio extends React.Component {
 
 	    <div className="test">
 
-			<Controls audio={this.state.audio} />
+			<Controls 
+				play={this.play}
+				pause={this.pause}
+			/>
 
 
 			<Visualizer audioCtx={this.state.audioCtx}/>
 			<NowPlaying />
-			<Tracker />
 
 
 			<hr />
@@ -202,8 +202,6 @@ class Radio extends React.Component {
 }
 
 
-// Update the tracker every second
-setInterval(Tracker, 1000);
 
 registerServiceWorker();
 
