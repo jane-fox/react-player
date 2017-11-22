@@ -50,31 +50,26 @@ function NowPlaying(props) {
 
 class Controls extends React.Component {
 
-	constructor(props) {
-		super(props);
-
-
-	} // constructor
-
 	render() {
-				let button = null;
-/*
-		if (props.audio.paused) {
-			button = <PlayButton play={props.play} />;
+		let button = null;
+
+		console.log(this.props);
+
+		if (this.props.audio.paused) {
+			button = <PlayButton play={this.props.play} />;
 		} else {
-			button = <PauseButton pause={props.pause} />;
+			button = <PauseButton pause={this.props.pause} />;
+		}
 
-		}*/
-			return (
-
-		<div>
-			{button}
-		</div>
-	);
+		return (
+			<div>
+				{button}
+			</div>
+		);
 	}
 
 
-}
+} // controls 
 
 function PlayButton(props) {
 	return (
@@ -202,10 +197,12 @@ class Radio extends React.Component {
 
 	play() {
 		this.state.audio.play();
+		this.setState({audio: this.state.audio});
 	}
 
 	pause() {
 		this.state.audio.pause();
+		this.setState({audio: this.state.audio});
 	}
 
 
@@ -217,7 +214,7 @@ class Radio extends React.Component {
 	    <div className="test">
 
 			<Controls 
-				audio={this.audio}
+				audio={this.state.audio}
 				play={this.play}
 				pause={this.pause}
 			/>
