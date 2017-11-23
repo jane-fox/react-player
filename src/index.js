@@ -9,8 +9,9 @@ import "material-icons";
 
 import ChannelList from "./Channels";
 import Visualizer from "./Visualizer";
+import Controls from "./Controls";
 
-//import Channels from './Channels';
+
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -35,58 +36,6 @@ import registerServiceWorker from './registerServiceWorker';
 		"listeners": "80",
 		"lastPlaying": "The Dells - Your Song"
 */
-
-
-
-function NowPlaying(props) {
-	return (
-		<div>
-			<h2>Now Playing</h2>
-			<div>{props.title}</div>
-		</div>
-	);
-}
-
-
-class Controls extends React.Component {
-
-	render() {
-		let button = null;
-
-		console.log(this.props);
-
-		if (this.props.audio.paused) {
-			button = <PlayButton play={this.props.play} />;
-		} else {
-			button = <PauseButton pause={this.props.pause} />;
-		}
-
-		return (
-			<div>
-				{button}
-			</div>
-		);
-	}
-
-
-} // controls 
-
-function PlayButton(props) {
-	return (
-		<button className="control-button big" onClick={props.play}>
-			<i className="mi mi-play-circle-outline"></i>
-		</button>
-	);
-}
-
-function PauseButton(props) {
-	return (
-		<button className="control-button big" onClick={props.pause}>
-			<i className="mi mi-pause-circle-outline"></i>
-		</button>
-	);	
-}
-
 
 
 
@@ -130,13 +79,13 @@ class Radio extends React.Component {
 
 		// Search channels for matching id
 		var new_channel = this.state.channels.find(
-			channel => channel.id == channel_id
+			channel => channel.id === channel_id
 		);
 		//console.log(new_channel);
 
 		// TODO quality picker in options
 		var playlist = new_channel.playlists.find(
-			list => list.quality == "high"
+			list => list.quality === "high"
 		);
 
 
@@ -180,7 +129,7 @@ class Radio extends React.Component {
 	handleKeyPress(event) {
 
 		// Play / Pause on spacebar
-		if(event.key == ' ' || event.code == "Space") {
+		if(event.key === ' ' || event.code === "Space") {
 
 			// Stops page from scrolling down
 			event.preventDefault();
@@ -213,6 +162,7 @@ class Radio extends React.Component {
 
 	    <div className="test">
 
+
 			<Controls 
 				audio={this.state.audio}
 				play={this.play}
@@ -221,7 +171,6 @@ class Radio extends React.Component {
 
 
 			<Visualizer audioCtx={this.state.audioCtx}/>
-			<NowPlaying />
 
 
 			<hr />

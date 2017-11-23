@@ -7,6 +7,9 @@ body {
   color: #ffffee;
 }
 
+canvas {
+  border: 2px solid #dac;
+}
 
 .radio {
   width: 500px;
@@ -24,30 +27,3 @@ body {
   display: block;
   
 }
-
-.control-button {
-  border: 0;
-  background-color: #248;
-  border-radius: 100px;
-  cursor: pointer;
-  outline: none;
-
-  padding: 5px;
-  font-size: 24px;
-}
-
-.control-button:hover {
-  background-color: #48f;
-
-}
-
-/* Remove extra space around icon */
-.control-button .mi {
-  float: left;
-}
-
-.control-button.big {
-  font-size: 48px;
-  padding: 10px;
-}
-
