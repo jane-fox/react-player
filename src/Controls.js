@@ -22,7 +22,7 @@ class Controls extends React.Component {
 				<div className="stripe">
 					{button}
 				</div>
-				
+
 			</section>
 		);
 	}

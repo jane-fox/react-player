@@ -68,6 +68,7 @@ class Radio extends React.Component {
 		document.onkeypress = this.handleKeyPress;
 
 		this.state.audio.src = "http://ice1.somafm.com/groovesalad-128-mp3";
+		this.state.audio.crossOrigin = "anonymous";
 
 	} // constructor
 
@@ -170,7 +171,10 @@ class Radio extends React.Component {
 			/>
 
 
-			<Visualizer audioCtx={this.state.audioCtx}/>
+			<Visualizer 
+				audioCtx={this.state.audioCtx}
+				audio={this.state.audio}
+			/>
 
 
 			<hr />
