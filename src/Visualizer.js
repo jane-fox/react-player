@@ -27,10 +27,13 @@ class Visualizer extends React.Component {
 		this.state = {
 			analyser: new_analyser,
 			bufferLength: bufferLength,
-			dataArray: dataArray
+			dataArray: dataArray,
+			width: window.innerWidth,
+			height: 150
 		};
 			
 		this.draw = this.draw.bind(this);
+		this.size_player = this.size_player.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 
 	}
@@ -42,6 +45,8 @@ class Visualizer extends React.Component {
 
 		this.setState({canvas: new_canvas});
 
+		this.size_player();
+
 		this.draw();
 
 	}
@@ -49,19 +54,25 @@ class Visualizer extends React.Component {
 	// Change size of canvas
 	size_player() {
 
-		var vis_width = window.innerWidth;
-		var vis_height = 100;
 
-		/*
-		audioSource = audioCtx.createMediaElementSource(audio);
-		audioSource.connect(analyser);
-		audioSource.connect(audioCtx.destination);
+		var canvas = ReactDOM.findDOMNode(this.refs.canvas);
 
-		*/
-		var canvas = document.getElementById("visualizer");
+		if (canvas) {
 
-		canvas.height = vis_height;
-		canvas.width = vis_width;
+			var container = ReactDOM.findDOMNode(this.refs.container);
+			//console.log(container.offsetWidth);
+			canvas.height = 150;
+			canvas.width = container.offsetWidth;
+
+			this.setState({
+				height: 150,
+				width: window.innerWidth
+			})
+		}
+
+
+
+
 	} // size_player()
 
 
@@ -75,7 +86,7 @@ class Visualizer extends React.Component {
 			var ctx = canvas.getContext("2d");
 
 			//ctx.clearRect(0, 0, vis_width, vis_height);
-			ctx.clearRect(0, 0, 200, 80);
+			ctx.clearRect(0, 0, this.state.width, this.state.height);
 
 			var barWidth = 1;
 			//var barWidth = (10 / bufferLength) * 2.5;
@@ -91,7 +102,7 @@ class Visualizer extends React.Component {
 
 				//ctx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
 				ctx.fillStyle = '#FF5f00';
-				ctx.fillRect(x, 0, barWidth, barHeight );
+				ctx.fillRect(x, this.state.height - barHeight, barWidth, 150 );
 
 				x += barWidth + 1;
 			}
@@ -104,10 +115,10 @@ class Visualizer extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div ref="container">
 				<canvas ref="canvas"></canvas>
 			</div>
-			);
+		);
 	}
 
 
