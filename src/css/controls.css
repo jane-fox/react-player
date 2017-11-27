@@ -1,37 +1,54 @@
 
 .stripe {
-  background-color: #248;
-  height: 30px;
+	position: relative;
+	padding: 10px;
+	padding-left: 150px;
+	background-color: #248;
+	height: 30px;
+	line-height: 30px;
+}
+
+
+.above-bar {
+	margin-left: 150px;
+	margin-bottom: 10px;
+	margin-top: 20px;
 }
 
 
 
 
-.control-button {
-  border: 0;
-  background-color: #248;
-  border-radius: 100px;
-  cursor: pointer;
-  outline: none;
 
-  padding: 5px;
+.play-button {
 
+	border: 0;
+	background-color: #248;
+	border-radius: 100px;
+	cursor: pointer;
+	outline: none;
+
+	padding: 10px;
+	font-size: 70px;
+	line-height: 70px;
+
+	height: 90px;
+	width: 90px;
+
+
+	position: absolute;
+	left: 20px;
+	top: -20px;
+	bottom: -20px;
+
+	transition: .5s;
 }
 
-.control-button:hover {
-  background-color: #48f;
+.play-button:hover {
+	background-color: #48f;
 
 }
 
 /* Remove extra space around icon */
-.control-button .mi {
-  float: left;
+.play-button .mi {
+	float: left;
 }
-
-.control-button.big {
-  font-size: 60px;
-  line-height: 60px;
-  margin-top: -15px;
-  margin-left: 15px;
-}
-

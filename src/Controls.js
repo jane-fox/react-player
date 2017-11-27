@@ -18,9 +18,10 @@ class Controls extends React.Component {
 
 		return (
 			<section>
-				<h2>Now Playing</h2>
+				<h2 className="above-bar">Now Playing</h2>
 				<div className="stripe">
 					{button}
+					Song Title - by Artist Name
 				</div>
 
 			</section>
@@ -33,7 +34,7 @@ class Controls extends React.Component {
 
 function PlayButton(props) {
 	return (
-		<button className="control-button big" onClick={props.play}>
+		<button className="play-button" onClick={props.play}>
 			<i className="mi mi-play-circle-outline"></i>
 		</button>
 	);
@@ -41,7 +42,7 @@ function PlayButton(props) {
 
 function PauseButton(props) {
 	return (
-		<button className="control-button big" onClick={props.pause}>
+		<button className="play-button" onClick={props.pause}>
 			<i className="mi mi-pause-circle-outline"></i>
 		</button>
 	);	

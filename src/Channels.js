@@ -35,10 +35,10 @@ function ChannelList(props) {
   }
 
   return (
-    <div>
+    <section className="channel-list">
       <h3>Channels</h3>
       <div>{list}</div>
-    </div>
+    </section>
   );
 }
 

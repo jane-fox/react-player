@@ -140,6 +140,9 @@ class Radio extends React.Component {
 			} else {
 				this.state.audio.pause();
 			}
+			
+			this.setState({audio: this.state.audio});
+
 		}
 
 	} // handleKeyPress
@@ -178,7 +181,11 @@ class Radio extends React.Component {
 
 
 			<hr />
-
+			<div>
+				You are currently tuned into <br />
+				Groove Salad <br />
+				Show All Channels. <br />
+			</div>
 			<ChannelList 
 				channels={this.state.channels}
 				change_channel={this.change_channel}
