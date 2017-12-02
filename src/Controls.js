@@ -21,7 +21,7 @@ class Controls extends React.Component {
 				<h2 className="above-bar">Now Playing</h2>
 				<div className="stripe">
 					{button}
-					Song Title - by Artist Name
+					{this.props.current_song}
 				</div>
 
 			</section>

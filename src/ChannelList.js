@@ -37,12 +37,6 @@ function ChannelList(props) {
   return (
     <section className="channel-list">
 
-      <div>
-        You are currently tuned into <br />
-        {props.current_channel}
-        Show All Channels. <br />
-      </div>
-
       <h3>Channels</h3>
       <div>{list}</div>
 

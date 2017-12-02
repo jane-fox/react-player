@@ -7,7 +7,9 @@ import './data.js';
 import axios from "axios";
 import "material-icons";
 
-import ChannelList from "./Channels";
+import ChannelList from "./ChannelList";
+import SongList from "./SongList";
+
 import Visualizer from "./Visualizer";
 import Controls from "./Controls";
 
@@ -17,24 +19,24 @@ import registerServiceWorker from './registerServiceWorker';
 
 /*
 "id": "7soul",
-		"title": "Seven Inch Soul",
-		"description": "Vintage soul tracks from the original 45 RPM vinyl.",
-		"dj": "Dion Watts Garcia",
-		"djmail": "dion@somafm.com",
-		"genre": "oldies",
-		"image": "https://api.somafm.com/img/7soul120.png",
-		"largeimage": "https://api.somafm.com/logos/256/7soul256.png",
-		"xlimage": "https://api.somafm.com/logos/512/7soul512.png",
-		"twitter": "SevenInchSoul",
-		"updated": "1396144686",
-		"playlists": [
-			{ "url": "https://api.somafm.com/7soul130.pls", "format": "aac",  "quality": "highest" },
-			{ "url": "https://api.somafm.com/7soul.pls", "format": "mp3",  "quality": "high" },
-			{ "url": "https://api.somafm.com/7soul64.pls", "format": "aacp",  "quality": "high" },
-			{ "url": "https://api.somafm.com/7soul32.pls", "format": "aacp",  "quality": "low" }
-		],
-		"listeners": "80",
-		"lastPlaying": "The Dells - Your Song"
+	"title": "Seven Inch Soul",
+	"description": "Vintage soul tracks from the original 45 RPM vinyl.",
+	"dj": "Dion Watts Garcia",
+	"djmail": "dion@somafm.com",
+	"genre": "oldies",
+	"image": "https://api.somafm.com/img/7soul120.png",
+	"largeimage": "https://api.somafm.com/logos/256/7soul256.png",
+	"xlimage": "https://api.somafm.com/logos/512/7soul512.png",
+	"twitter": "SevenInchSoul",
+	"updated": "1396144686",
+	"playlists": [
+		{ "url": "https://api.somafm.com/7soul130.pls", "format": "aac",  "quality": "highest" },
+		{ "url": "https://api.somafm.com/7soul.pls", "format": "mp3",  "quality": "high" },
+		{ "url": "https://api.somafm.com/7soul64.pls", "format": "aacp",  "quality": "high" },
+		{ "url": "https://api.somafm.com/7soul32.pls", "format": "aacp",  "quality": "low" }
+	],
+	"listeners": "80",
+	"lastPlaying": "The Dells - Your Song"
 */
 
 
@@ -45,13 +47,18 @@ class Radio extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var AudioContext = window.AudioContext || window.webkitAudioContext;
 
 		this.state = {
 			channels: window.channels.channels,
-			audioCtx: new AudioContext(),
 			audio: new Audio(),
 			now_playing: "",
+
+			current_channel: "current_channel",
+			current_song: "current_song",
+			current_songlist: [],
+
+			channel_url: "http://somafm.com/channels.json",
+			songlist_url: "http://somafm.com/songs/",
 
 		};
 		//console.log(this.state.channels);
@@ -62,10 +69,12 @@ class Radio extends React.Component {
     	this.change_channel = this.change_channel.bind(this);
     	this.play = this.play.bind(this);
     	this.pause = this.pause.bind(this);
-    	this.handleKeyPress = this.handleKeyPress.bind(this);
+    	this.handle_keys = this.handle_keys.bind(this);
+    	this.update_songs = this.update_songs.bind(this);
+    	this.update_channels = this.update_channels.bind(this);
 
     	//Event Listeners
-		document.onkeypress = this.handleKeyPress;
+		document.onkeypress = this.handle_keys;
 
 		this.state.audio.src = "http://ice1.somafm.com/groovesalad-128-mp3";
 		this.state.audio.crossOrigin = "anonymous";
@@ -126,11 +135,11 @@ class Radio extends React.Component {
 
 	}
 
-
-	handleKeyPress(event) {
+	// Check for hotkeys to activate for when a key is pressed
+	handle_keys(event) {
 
 		// Play / Pause on spacebar
-		if(event.key === ' ' || event.code === "Space") {
+		if (event.key === ' ' || event.code === "Space") {
 
 			// Stops page from scrolling down
 			event.preventDefault();
@@ -145,8 +154,47 @@ class Radio extends React.Component {
 
 		}
 
-	} // handleKeyPress
+	} // handle_keys
 
+
+	// Updates the list of songs
+	update_songs() {
+
+		var full_url = this.state.songlist_url + this.state.current_channel.id + ".json";
+
+		axios.get(full_url)
+			.then(function (response) {
+				//console.log(response);
+
+				var songs = response.songs;
+				console.log(songs);
+
+
+				this.state.current_songlist = songs;
+
+
+			})
+			.catch(function (error) {
+				console.warn(error);
+			});
+		
+	}
+
+	update_channels() {
+
+		axios.get(this.state.channel_url)
+			.then(function (response) {
+				//console.log(response);
+
+				var channels = response.channels;
+				console.log(channels);
+				this.state.channels = channels;
+
+			})
+			.catch(function (error) {
+				console.warn(error);
+			});
+	}
 
 	play() {
 		this.state.audio.play();
@@ -171,24 +219,32 @@ class Radio extends React.Component {
 				audio={this.state.audio}
 				play={this.play}
 				pause={this.pause}
+				current_song={this.state.current_song}
 			/>
 
 
 			<Visualizer 
-				audioCtx={this.state.audioCtx}
 				audio={this.state.audio}
 			/>
 
 
 			<hr />
-			<div>
-				You are currently tuned into <br />
-				Groove Salad <br />
-				Show All Channels. <br />
-			</div>
+
+	      <div>
+	        You are currently tuned into <br />
+	        
+
+	        Show All Channels. <br />
+	      </div>
+
 			<ChannelList 
 				channels={this.state.channels}
+				current_channel={this.state.current_channel}
 				change_channel={this.change_channel}
+			 />
+
+ 			<SongList 
+				songs={this.state.current_songlist}
 			 />
 
 

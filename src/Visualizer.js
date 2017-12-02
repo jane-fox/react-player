@@ -10,9 +10,11 @@ class Visualizer extends React.Component {
 	constructor(props) {
 		super(props);
 
+		var AudioContext = window.AudioContext || window.webkitAudioContext;
 
+		var ctx = new AudioContext();
 
-		var new_analyser = props.audioCtx.createAnalyser();
+		var new_analyser = ctx.createAnalyser();
 		new_analyser.fftsize = 256;
 
 		var bufferLength = new_analyser.frequencyBinCount;
@@ -20,9 +22,9 @@ class Visualizer extends React.Component {
 		new_analyser.getByteTimeDomainData(dataArray);
 
 
-    var audioSource = props.audioCtx.createMediaElementSource(props.audio);
+    	var audioSource = ctx.createMediaElementSource(props.audio);
 		audioSource.connect(new_analyser);
-		audioSource.connect(props.audioCtx.destination);
+		audioSource.connect(ctx.destination);
 
 		this.state = {
 			analyser: new_analyser,
@@ -92,6 +94,7 @@ class Visualizer extends React.Component {
 			//var barWidth = (10 / bufferLength) * 2.5;
 			var barHeight;
 			var x = 0;
+			var spacing = 0;
 
 
 			this.state.analyser.getByteFrequencyData(this.state.dataArray);
@@ -104,7 +107,7 @@ class Visualizer extends React.Component {
 				ctx.fillStyle = '#224488';
 				ctx.fillRect(x, 0, barWidth, barHeight );
 
-				x += barWidth + 1;
+				x += barWidth + spacing;
 			}
 
 		}
