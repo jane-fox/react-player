@@ -26,26 +26,3 @@ canvas {
   float: left;
 }
 
-
-.channel {
-  border-bottom: 1px solid #000;
-  display: block;
-  
-}
-
-
-.channel-list {
-  max-height: 80vh;
-  overflow-y: scroll;
-}
-
-.channel img {
-  transition: .5s;
-  width: 40px;
-  height: 40px;
-}
-
-.channel:hover img {
-  width: 120px;
-  height: 120px;
-}

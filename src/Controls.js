@@ -9,21 +9,30 @@ class Controls extends React.Component {
 
 	render() {
 		let button = null;
+		let byline = "";
 
+		// Decide whether to show pause or play button
 		if (this.props.audio.paused) {
 			button = <PlayButton play={this.props.play} />;
 		} else {
 			button = <PauseButton pause={this.props.pause} />;
 		}
 
+		// Make sure we have an artist before showing "by"
+		if (this.props.current_song.artist) {
+			byline = " - by " + this.props.current_song.artist;
+		}
+
+
 		return (
 			<section>
 				<h2 className="above-bar">Now Playing</h2>
 				<div className="stripe">
 					{button}
-					{this.props.current_song.title}
-					- by 
-					{this.props.current_song.artist}
+					<p className="current-song">
+						{this.props.current_song.title}
+						{byline}
+					</p>
 				</div>
 
 			</section>

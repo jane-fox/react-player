@@ -14,13 +14,13 @@ function ChannelList(props) {
 
   props.channels.forEach(function(channel) {
     list.push(
-      <div key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
-        <img src={channel.image} alt={channel.title} className="pull-left" />
+      <li key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
+        <img src={channel.image} alt={channel.title} />
         <h3>{channel.title}</h3>
         <p>{channel.description}</p>
         <p>{channel.genre}</p>
         <p>{channel.listeners} listeners</p>
-      </div>
+      </li>
     );
   })
 
@@ -38,7 +38,7 @@ function ChannelList(props) {
     <section className="channel-list">
 
       <h3>Channels</h3>
-      <div>{list}</div>
+      <ul>{list}</ul>
 
     </section>
   );

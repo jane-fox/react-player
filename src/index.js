@@ -12,6 +12,7 @@ import SongList from "./SongList";
 
 import Visualizer from "./Visualizer";
 import Controls from "./Controls";
+import CurrentStation from "./CurrentStation";
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -51,9 +52,9 @@ class Radio extends React.Component {
 		this.state = {
 			channels: window.channels.channels,
 			audio: new Audio(),
+			display: "channels",
 
-			current_channels: [],
-			current_channel: [],
+			current_channel: window.channels.channels[8],
 			current_song: [],
 			current_songlist: [],
 
@@ -83,6 +84,17 @@ class Radio extends React.Component {
 		this.update_songs();
 
 	} // constructor
+
+    componentWillUnmount() {
+        this.clearTimeouts();
+    }
+
+    componentDidMount() {
+       /* ReactDOM.render(
+			,
+			this.refs.controls
+    	);*/
+    }
 
 
 	change_channel(channel_id) {
@@ -121,7 +133,9 @@ class Radio extends React.Component {
 				var real_url = file.split("File1=")[1];
 
 				self.state.audio.src = real_url;
-				self.state.audio.play();
+				self.setState({audio: self.state.audio});
+				self.update_songs(new_channel.id);
+				self.play();
 
 			})
 			.catch(function (error) {
@@ -159,30 +173,39 @@ class Radio extends React.Component {
 
 
 	// Updates the list of songs
-	update_songs() {
+	update_songs(station) {
 
 		var self = this;
+		var station = station || this.state.current_channel.id
 
 		// Don't attempt request if we don't have the data
-		if (this.state.songlist_url && this.state.current_channel.id) {
+		if (this.state.songlist_url && station) {
 
-		var full_url = this.state.songlist_url + this.state.current_channel.id + ".json";
+			var full_url = this.state.songlist_url + station + ".json";
 
-		axios.get(full_url)
-			.then(function (response) {
-				//console.log(response);
+			axios.get(full_url)
+				.then(function (response) {
 
-				var songs = response.songs;
-				console.log(songs);
+					console.log("Updating songs", response);
 
+					var songs = response.data.songs;
 
-				self.setState({current_songlist: songs});
+					if (songs) {
+						console.log("New song: ", songs[0]);
+						self.setState({
+							current_song: songs[0],
+							current_songlist: songs
+						});
+					}
 
-			})
-			.catch(function (error) {
-				console.warn(error);
-			});
-		}
+				})
+				.catch(function (error) {
+					console.warn(error);
+				});
+
+			} else {
+				console.info("State not set, songs not updated.");
+			}
 		
 	}
 
@@ -192,11 +215,14 @@ class Radio extends React.Component {
 
 		axios.get(this.state.channel_url)
 			.then(function (response) {
-				//console.log(response);
+				console.log("Updating channels", response);
 
-				var channels = response.channels;
-				console.log(channels);
-				self.setState({current_channels: channels});
+				var fresh_channels = response.data.channels;
+
+				if (fresh_channels) {
+					//console.log(channels);
+					self.setState({channels: fresh_channels});	
+				}
 
 
 			})
@@ -222,50 +248,45 @@ class Radio extends React.Component {
 
 
 	render() {
-	return (
-	  <main className="radio">
 
+		var list = null;
 
-	    <div className="test">
-
-
-			<Controls 
-				audio={this.state.audio}
-				play={this.play}
-				pause={this.pause}
-				current_song={this.state.current_song}
-			/>
-
-
-			<Visualizer 
-				audio={this.state.audio}
-			/>
-
-
-			<hr />
-
-	      <div>
-	        You are currently tuned into {this.state.current_channel.title}<br />
-	        
-      		<div className="button" onClick={this.toggle_display} >change</div>
-
-	      </div>
-
-			<ChannelList 
+		if (this.state.display == "channels") {
+			list = <ChannelList 
 				channels={this.state.channels}
 				current_channel={this.state.current_channel}
 				change_channel={this.change_channel}
 			 />
-
- 			<SongList 
+		} else {
+			list = <SongList 
 				songs={this.state.current_songlist}
 			 />
+		}
 
+		return (
+		  <main className="radio">
 
-	    </div>
+				<Controls 
+					audio={this.state.audio}
+					play={this.play}
+					pause={this.pause}
+					current_song={this.state.current_song}
+				/>
 
-	  </main>
-	);
+				<Visualizer 
+					audio={this.state.audio}
+				/>
+
+				<CurrentStation
+					current_channel={this.state.current_channel}
+					toggle_display={this.toggle_display}
+				/>
+
+		      {list}
+	 			
+
+		  </main>
+		);
 	}
 
 } // Radio

@@ -1,0 +1,52 @@
+
+
+.channel-list {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.channel-list ul, .channel-list li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+
+.current-channel {
+
+  background-color: rgba(255,255,255,.1);
+  padding: 20px;
+  border-bottom: 3px solid #000;
+
+}
+
+
+
+.channel {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+  border-bottom: 1px solid #000;
+}
+
+.channel img {
+  grid-column: 1 ;
+  grid-row: 1 ;
+}
+
+.channel h3 {
+  grid-column: 3/6;
+  grid-row: 1;
+  display: inline-block;
+
+}
+
+.channel p {
+  grid-column: 2/6;
+  grid-row: 2
+}
+
+
+
