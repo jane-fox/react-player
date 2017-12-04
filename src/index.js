@@ -51,10 +51,10 @@ class Radio extends React.Component {
 		this.state = {
 			channels: window.channels.channels,
 			audio: new Audio(),
-			now_playing: "",
 
-			current_channel: "current_channel",
-			current_song: "current_song",
+			current_channels: [],
+			current_channel: [],
+			current_song: [],
 			current_songlist: [],
 
 			channel_url: "http://somafm.com/channels.json",
@@ -78,6 +78,9 @@ class Radio extends React.Component {
 
 		this.state.audio.src = "http://ice1.somafm.com/groovesalad-128-mp3";
 		this.state.audio.crossOrigin = "anonymous";
+
+		this.update_channels();
+		this.update_songs();
 
 	} // constructor
 
@@ -128,9 +131,7 @@ class Radio extends React.Component {
 
 		//console.log(test);
 
-		this.setState({
-			now_playing: channel_id
-		});
+
 
 
 	}
@@ -160,6 +161,11 @@ class Radio extends React.Component {
 	// Updates the list of songs
 	update_songs() {
 
+		var self = this;
+
+		// Don't attempt request if we don't have the data
+		if (this.state.songlist_url && this.state.current_channel.id) {
+
 		var full_url = this.state.songlist_url + this.state.current_channel.id + ".json";
 
 		axios.get(full_url)
@@ -170,17 +176,19 @@ class Radio extends React.Component {
 				console.log(songs);
 
 
-				this.state.current_songlist = songs;
-
+				self.setState({current_songlist: songs});
 
 			})
 			.catch(function (error) {
 				console.warn(error);
 			});
+		}
 		
 	}
 
 	update_channels() {
+
+		var self = this;
 
 		axios.get(this.state.channel_url)
 			.then(function (response) {
@@ -188,7 +196,8 @@ class Radio extends React.Component {
 
 				var channels = response.channels;
 				console.log(channels);
-				this.state.channels = channels;
+				self.setState({current_channels: channels});
+
 
 			})
 			.catch(function (error) {
@@ -204,6 +213,11 @@ class Radio extends React.Component {
 	pause() {
 		this.state.audio.pause();
 		this.setState({audio: this.state.audio});
+	}
+
+	toggle_display() {
+		var list = "songs";
+		console.log(list);
 	}
 
 
@@ -231,10 +245,10 @@ class Radio extends React.Component {
 			<hr />
 
 	      <div>
-	        You are currently tuned into <br />
+	        You are currently tuned into {this.state.current_channel.title}<br />
 	        
+      		<div className="button" onClick={this.toggle_display} >change</div>
 
-	        Show All Channels. <br />
 	      </div>
 
 			<ChannelList 

@@ -13,9 +13,13 @@ canvas {
 }
 
 .radio {
-  width: 500px;
-  margin: auto;
+  width: 777px;
+  margin: 0 auto;
   display:block;
+  padding-top: 20px;
+
+  background: rgba(0,0,0,.1);
+
 }
 
 .pull-left {
