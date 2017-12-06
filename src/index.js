@@ -145,10 +145,8 @@ class Radio extends React.Component {
 
 		//console.log(test);
 
-
-
-
 	}
+
 
 	// Check for hotkeys to activate for when a key is pressed
 	handle_keys(event) {
@@ -251,7 +249,7 @@ class Radio extends React.Component {
 
 		var list = null;
 
-		if (this.state.display == "channels") {
+		if (this.state.display == "songs") {
 			list = <ChannelList 
 				channels={this.state.channels}
 				current_channel={this.state.current_channel}

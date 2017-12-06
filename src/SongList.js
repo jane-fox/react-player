@@ -1,5 +1,5 @@
 import React from 'react';
-import "./data.js";
+import "./css/song-list.css";
 
 
 
@@ -11,12 +11,12 @@ function SongList(props) {
 
   props.songs.forEach(function(song) {
     list.push(
-      <div key={song.date} className="song" >
-        <h3>{song.title}</h3>
-        <p>{song.artist}</p>
-        <p>{song.album}</p>
-        <p>{song.date}</p>
-      </div>
+      <li key={song.date} className="song" >
+        <span className="title">{song.title}</span>
+        <span  className="artist">{song.artist}</span>
+        <span className="album">{song.album}</span>
+        <span className="date">{song.date}</span>
+      </li>
     );
   })
 
@@ -26,7 +26,7 @@ function SongList(props) {
     <section className="song-list">
 
       <h3>Songs</h3>
-      <div>{list}</div>
+      <ul>{list}</ul>
 
     </section>
   );

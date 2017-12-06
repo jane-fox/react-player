@@ -1,0 +1,27 @@
+
+
+.channel-list {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.song-list ul, .song-list li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+
+
+
+.song {
+  height: 80px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+  border-bottom: 1px solid #000;
+}
+
