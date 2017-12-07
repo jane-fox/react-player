@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class CurrentStation extends React.Component {
+class CurrentChannel extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -48,4 +48,4 @@ class CurrentStation extends React.Component {
 
 }
 
-export default CurrentStation;
+export default CurrentChannel;

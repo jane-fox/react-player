@@ -26,3 +26,7 @@ canvas {
   float: left;
 }
 
+.clearfix {
+  clear: both;
+}
+

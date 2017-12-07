@@ -12,7 +12,7 @@ import SongList from "./SongList";
 
 import Visualizer from "./Visualizer";
 import Controls from "./Controls";
-import CurrentStation from "./CurrentStation";
+import CurrentChannel from "./CurrentChannel";
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -54,7 +54,7 @@ class Radio extends React.Component {
 			audio: new Audio(),
 			display: "channels",
 
-			current_channel: window.channels.channels[8],
+			current_channel: window.channels.channels[17],
 			current_song: [],
 			current_songlist: [],
 
@@ -275,10 +275,16 @@ class Radio extends React.Component {
 					audio={this.state.audio}
 				/>
 
-				<CurrentStation
+
+				<CurrentChannel
 					current_channel={this.state.current_channel}
 					toggle_display={this.toggle_display}
 				/>
+
+
+				<p>
+					Currently showing songlist. <span onClick={this.toggle_display}>Show channels</span>
+				</p>
 
 		      {list}
 	 			

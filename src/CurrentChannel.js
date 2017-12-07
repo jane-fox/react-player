@@ -2,7 +2,7 @@ import React from 'react';
 import './css/channels.css';
 
 
-class CurrentStation extends React.Component {
+class CurrentChannel extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -38,7 +38,7 @@ class CurrentStation extends React.Component {
 						<h4>{this.props.current_channel.title}</h4>
 						<p>{this.props.current_channel.description}</p>
 						<p>{this.props.current_channel.genre}</p>
-
+						<div className="clearfix"> </div>
 					</div>
 
 				</section>
@@ -49,4 +49,4 @@ class CurrentStation extends React.Component {
 
 }
 
-export default CurrentStation;
+export default CurrentChannel;

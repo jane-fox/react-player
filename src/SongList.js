@@ -25,8 +25,17 @@ function SongList(props) {
   return (
     <section className="song-list">
 
-      <h3>Songs</h3>
-      <ul>{list}</ul>
+      <ul>
+        <li className="heading song" >
+          <span className="title">Title</span>
+          <span  className="artist">Artist</span>
+          <span className="album">Album</span>
+          <span className="date">Played</span>
+        </li>
+
+        {list}
+
+      </ul>
 
     </section>
   );
