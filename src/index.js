@@ -184,12 +184,12 @@ class Radio extends React.Component {
 			axios.get(full_url)
 				.then(function (response) {
 
-					console.log("Updating songs", response);
+					//console.log("Updating songs", response);
 
 					var songs = response.data.songs;
 
 					if (songs) {
-						console.log("New song: ", songs[0]);
+						//console.log("New song: ", songs[0]);
 						self.setState({
 							current_song: songs[0],
 							current_songlist: songs
@@ -213,7 +213,7 @@ class Radio extends React.Component {
 
 		axios.get(this.state.channel_url)
 			.then(function (response) {
-				console.log("Updating channels", response);
+				//console.log("Updating channels", response);
 
 				var fresh_channels = response.data.channels;
 

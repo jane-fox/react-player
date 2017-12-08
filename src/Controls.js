@@ -27,12 +27,18 @@ class Controls extends React.Component {
 		return (
 			<section>
 				<h2 className="above-bar">Now Playing</h2>
+
 				<div className="stripe">
+
 					{button}
+
 					<p className="current-song">
 						{this.props.current_song.title}
 						{byline}
 					</p>
+
+					<Volume audio={this.props.audio} />
+
 				</div>
 
 			</section>
@@ -67,6 +73,68 @@ function NowPlaying(props) {
 	);
 }
 
+
+
+class Volume extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+
+		this.state = {
+			open: false,
+		};
+	}
+
+	open() {
+		this.setState({open: true});
+	}
+
+	close() {
+		this.setState({open: false});
+	}
+
+	render() {
+		let slider = null;
+		let volume = this.props.audio.volume;
+		console.log(this.props.audio);
+		console.log(this.props.audio.volume);
+
+		// Decide whether to show pause or play button
+		if (!this.state.open) {
+			slider = <VolumeSlider />;
+		}
+
+
+
+		return (
+			<div className="open-volume">
+				<div><i className="mi mi-volume-up"></i></div>
+				{slider}
+			</div>
+		);
+	}
+
+
+} 
+
+
+// Input to control value, with hint icons
+function VolumeSlider() {
+	return (
+		<div class="volume-slider">
+			<i className="mi mi-volume-up"></i>
+			<input 
+				value="1"
+				type="range" 
+				min="0" 
+				max="1" 
+				step=".01"
+			/>
+			<i className="mi mi-volume-down"></i>
+		</div>
+	);
+}
 
 
 export default Controls;

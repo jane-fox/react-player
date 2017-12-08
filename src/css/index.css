@@ -8,12 +8,17 @@ body {
   color: #ffffee;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
 canvas {
   border: 0;
 }
 
 .radio {
-  width: 777px;
+  min-width: 420px;
   margin: 0 auto;
   display:block;
   padding-top: 20px;
@@ -24,6 +29,10 @@ canvas {
 
 .pull-left {
   float: left;
+}
+
+.pull-right {
+  float: right;
 }
 
 .clearfix {

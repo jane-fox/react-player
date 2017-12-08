@@ -2,7 +2,8 @@
 .stripe {
 	position: relative;
 	padding: 0px;
-	padding-left: 150px;
+	padding-left: 130px;
+	padding-right: 50px;
 	background-color: #248;
 	height: 50px;
 	line-height: 50px;
@@ -10,9 +11,11 @@
 
 
 	color: #000;
+	/*
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 5px;
+	*/
 }
 
 .current-song {
@@ -29,6 +32,13 @@
 	font-size: 16px;
 }
 
+.open-volume {
+	font-size: 30px;
+
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
 
 
 
@@ -65,4 +75,27 @@
 /* Remove extra space around icon */
 .play-button .mi {
 	float: left;
+}
+
+
+.volume-slider {
+	position: absolute;
+	right: 0px;
+	bottom: -50px;
+	padding: 5px;
+
+	display: flex;
+
+	background-color: rgba(0,0,0,.5);
+	color: #FFF;
+
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.volume-slider input {
+	width: 50vh;
+}
+.volume-slider i {
+	margin: 15px;
 }
