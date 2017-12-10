@@ -13,6 +13,7 @@ import SongList from "./SongList";
 import Visualizer from "./Visualizer";
 import Controls from "./Controls";
 import CurrentChannel from "./CurrentChannel";
+import DisplayControl from "./DisplayControl";
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -58,8 +59,8 @@ class Radio extends React.Component {
 			current_song: [],
 			current_songlist: [],
 
-			channel_url: "http://somafm.com/channels.json",
-			songlist_url: "http://somafm.com/songs/",
+			channel_url: "//somafm.com/channels.json",
+			songlist_url: "//somafm.com/songs/",
 
 		};
 		//console.log(this.state.channels);
@@ -73,6 +74,7 @@ class Radio extends React.Component {
     	this.handle_keys = this.handle_keys.bind(this);
     	this.update_songs = this.update_songs.bind(this);
     	this.update_channels = this.update_channels.bind(this);
+    	this.toggle_display = this.toggle_display.bind(this);
 
     	//Event Listeners
 		document.onkeypress = this.handle_keys;
@@ -174,7 +176,7 @@ class Radio extends React.Component {
 	update_songs(station) {
 
 		var self = this;
-		var station = station || this.state.current_channel.id
+		station = station || this.state.current_channel.id
 
 		// Don't attempt request if we don't have the data
 		if (this.state.songlist_url && station) {
@@ -240,8 +242,13 @@ class Radio extends React.Component {
 	}
 
 	toggle_display() {
-		var list = "songs";
-		console.log(list);
+
+		if (this.state.display === "channels") {
+			this.setState({ display: "songs" });
+		} else {
+			this.setState({ display: "channels" });
+		}
+
 	}
 
 
@@ -249,16 +256,16 @@ class Radio extends React.Component {
 
 		var list = null;
 
-		if (this.state.display == "songs") {
+		if (this.state.display === "channels") {
 			list = <ChannelList 
 				channels={this.state.channels}
 				current_channel={this.state.current_channel}
 				change_channel={this.change_channel}
-			 />
+			/>
 		} else {
 			list = <SongList 
 				songs={this.state.current_songlist}
-			 />
+			/>
 		}
 
 		return (
@@ -275,20 +282,17 @@ class Radio extends React.Component {
 					audio={this.state.audio}
 				/>
 
-
 				<CurrentChannel
 					current_channel={this.state.current_channel}
+				/>
+
+				<DisplayControl
+					display={this.state.display}
 					toggle_display={this.toggle_display}
 				/>
 
-
-				<p>
-					Currently showing songlist. <span onClick={this.toggle_display}>Show channels</span>
-				</p>
-
 		      {list}
 	 			
-
 		  </main>
 		);
 	}

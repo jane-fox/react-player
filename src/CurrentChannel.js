@@ -10,16 +10,6 @@ class CurrentChannel extends React.Component {
 	}
 
 
-	change_channel(click) {
-
-		// Get the data-id of the clicked channel
-		var channel = click.currentTarget.getAttribute("data-id");
-
-		// Use parent function to update channel state
-		this.props.change_channel(channel);
-
-	}
-
 	render() {
 
 		if ( typeof(this.props.current_channel) !== undefined ) {

@@ -65,13 +65,7 @@ function PauseButton(props) {
 	);	
 }
 
-function NowPlaying(props) {
-	return (
-		<div>
-			<div>{props.title}</div>
-		</div>
-	);
-}
+
 
 
 
@@ -97,8 +91,8 @@ class Volume extends React.Component {
 	render() {
 		let slider = null;
 		let volume = this.props.audio.volume;
-		console.log(this.props.audio);
-		console.log(this.props.audio.volume);
+		//console.log(this.props.audio);
+		//console.log(this.props.audio.volume);
 
 		// Decide whether to show pause or play button
 		if (!this.state.open) {
@@ -122,10 +116,10 @@ class Volume extends React.Component {
 // Input to control value, with hint icons
 function VolumeSlider() {
 	return (
-		<div class="volume-slider">
+		<div className="volume-slider">
 			<i className="mi mi-volume-up"></i>
 			<input 
-				value="1"
+				defaultValue="1"
 				type="range" 
 				min="0" 
 				max="1" 

@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/display-control.css';
 
 
 class DisplayControl extends React.Component {
@@ -9,28 +10,31 @@ class DisplayControl extends React.Component {
 	}
 
 
-	change_channel(click) {
-
-		// Get the data-id of the clicked channel
-		var channel = click.currentTarget.getAttribute("data-id");
-
-		// Use parent function to update channel state
-		this.props.change_channel(channel);
-
-	}
-
 	render() {
 
-		if ( typeof(this.props.current_channel) !== undefined ) {
+		var message = null;
 
-			return (
-				<section className="">
-					<p>
-						Currently showing songlist. <span onClick={this.toggle_display}>Show channels</span>
-					</p>
-				</section>
-				);
+		if ( this.props.display === "songs" ) {
+			message = <p>
+				Currently showing songlist. 
+				<span className="toggle-link" onClick={this.props.toggle_display}>
+					Show channels.
+				</span>
+			</p>
+		} else {
+			message = <p>
+				Currently showing all channels. 
+				<span className="toggle-link" onClick={this.props.toggle_display}>
+					Show songs for current channel.
+				</span>
+			</p>
 		}
+
+		return (
+			<section className="display-control">
+				{message}
+			</section>
+		);
 
 	} // render
 

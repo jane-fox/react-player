@@ -17,7 +17,8 @@
 }
 
 .song {
-  height: 80px;
+  height: 65px;
+
   box-sizing: border-box;
   border-bottom: 1px solid rgba(0,0,0,.4);
 
@@ -30,8 +31,11 @@
 }
 
 .song span {
-  flex: 1;
-  padding-left: 10px;
+  flex: 2;
+  margin-left: 20px;
 }
 
+.song .date {
+  flex: 1;
+}
 

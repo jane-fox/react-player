@@ -62,17 +62,19 @@ class Visualizer extends React.Component {
 		if (canvas) {
 
 			var container = ReactDOM.findDOMNode(this.refs.container);
-			//console.log(container.offsetWidth);
+			
+			// Make the visualizer just a tiny bit shorter than container
+			var new_width = parseInt(container.offsetWidth) - 20;
+			//console.log(new_width);
+
 			canvas.height = 150;
-			canvas.width = container.offsetWidth;
+			canvas.width = new_width;
 
 			this.setState({
 				height: 150,
-				width: window.innerWidth
+				width: new_width
 			})
 		}
-
-
 
 
 	} // size_player()

@@ -17,9 +17,9 @@ function ChannelList(props) {
       <li key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
         <img src={channel.image} alt={channel.title} />
         <h3>{channel.title}</h3>
-        <p>{channel.description}</p>
-        <p>{channel.genre}</p>
-        <p>{channel.listeners} listeners</p>
+        <p className="description">{channel.description}</p>
+        <span className="genre">{channel.genre}</span>
+        <div>{channel.listeners} listeners</div>
       </li>
     );
   })
