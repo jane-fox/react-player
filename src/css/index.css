@@ -19,9 +19,8 @@ canvas {
 
 .radio {
   min-width: 420px;
-  margin: 0 auto;
+  margin: 0;
   display:block;
-  padding-top: 20px;
 
   background: rgba(0,0,0,.1);
 

@@ -270,7 +270,9 @@ class Radio extends React.Component {
 
 		return (
 		  <main className="radio">
-
+				<CurrentChannel
+					current_channel={this.state.current_channel}
+				/>
 				<Controls 
 					audio={this.state.audio}
 					play={this.play}
@@ -282,20 +284,18 @@ class Radio extends React.Component {
 					audio={this.state.audio}
 				/>
 
-				<CurrentChannel
-					current_channel={this.state.current_channel}
-				/>
+
 
 				<DisplayControl
 					display={this.state.display}
 					toggle_display={this.toggle_display}
 				/>
 
-		      {list}
+		    	{list}
 	 			
 		  </main>
 		);
-	}
+	} // render
 
 } // Radio
 

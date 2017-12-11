@@ -37,7 +37,6 @@ function ChannelList(props) {
   return (
     <section className="channel-list">
 
-      <h3>Channels</h3>
       <ul>{list}</ul>
 
     </section>

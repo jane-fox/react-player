@@ -25,22 +25,12 @@
 }
 
 .above-bar {
-	margin-left: 150px;
+	margin-left: 130px;
 	margin-bottom: 10px;
 	margin-top: 0px;
 	font-weight: normal;
 	font-size: 16px;
 }
-
-.open-volume {
-	font-size: 30px;
-
-	position: absolute;
-	right: 10px;
-	top: 5px;
-}
-
-
 
 
 .play-button {
@@ -78,6 +68,38 @@
 }
 
 
+
+.volume-container {
+
+	position: absolute;
+	right: 0px;
+	top: 0px;
+
+
+}
+
+.volume-container button {
+	height: 50px;
+	line-height: 30px;
+	font-size: 30px;
+	padding: 10px;
+
+	border: none;
+	outline: none;
+	background: transparent;
+	background-color: transparent;
+	transition: .5s;
+	cursor: pointer;
+}
+
+.volume-container button:hover, .volume-container.open button {
+	color: #FFF;
+	background-color: rgba(0,0,0,.5);
+}
+
+
+
+
 .volume-slider {
 	position: absolute;
 	right: 0px;
@@ -94,7 +116,8 @@
 }
 
 .volume-slider input {
-	width: 50vh;
+	width: 50vw;
+	margin: 15px;
 }
 .volume-slider i {
 	margin: 15px;

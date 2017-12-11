@@ -93,6 +93,9 @@ class Visualizer extends React.Component {
 			ctx.clearRect(0, 0, this.state.width, this.state.height);
 
 			var barWidth = 1;
+			if (this.state.bufferLength.length < this.state.width) {
+				barWidth = 3;
+			}
 			//var barWidth = (10 / bufferLength) * 2.5;
 			var barHeight;
 			var x = 0;
@@ -100,6 +103,7 @@ class Visualizer extends React.Component {
 
 
 			this.state.analyser.getByteFrequencyData(this.state.dataArray);
+
 
 
 			for(var i = 0; i < this.state.bufferLength; i++) {
