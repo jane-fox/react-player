@@ -99,7 +99,7 @@ class Visualizer extends React.Component {
 			//var barWidth = (10 / bufferLength) * 2.5;
 			var barHeight;
 			var x = 0;
-			var spacing = 0;
+			var spacing = 1;
 
 
 			this.state.analyser.getByteFrequencyData(this.state.dataArray);
@@ -107,7 +107,7 @@ class Visualizer extends React.Component {
 
 
 			for(var i = 0; i < this.state.bufferLength; i++) {
-				barHeight = this.state.dataArray[i]/2;
+				barHeight = this.state.dataArray[i]/2 ;
 
 				//ctx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
 				ctx.fillStyle = '#224488';

@@ -75,6 +75,7 @@ class Radio extends React.Component {
     	this.update_songs = this.update_songs.bind(this);
     	this.update_channels = this.update_channels.bind(this);
     	this.toggle_display = this.toggle_display.bind(this);
+    	this.change_volume = this.change_volume.bind(this);
 
     	//Event Listeners
 		document.onkeypress = this.handle_keys;
@@ -135,7 +136,10 @@ class Radio extends React.Component {
 				var real_url = file.split("File1=")[1];
 
 				self.state.audio.src = real_url;
-				self.setState({audio: self.state.audio});
+				self.setState({
+					audio: self.state.audio,
+					current_channel: new_channel
+				});
 				self.update_songs(new_channel.id);
 				self.play();
 
@@ -241,6 +245,17 @@ class Radio extends React.Component {
 		this.setState({audio: this.state.audio});
 	}
 
+	change_volume(event) {
+
+		var new_volume = event.target.value;
+
+		if ( new_volume >= 0 ) {
+			//console.log("Changing volume to ", new_volume);
+			this.state.audio.volume = new_volume;
+			this.setState({audio: this.state.audio});
+		}
+	}
+
 	toggle_display() {
 
 		if (this.state.display === "channels") {
@@ -278,6 +293,7 @@ class Radio extends React.Component {
 					play={this.play}
 					pause={this.pause}
 					current_song={this.state.current_song}
+					change_volume={this.change_volume}
 				/>
 
 				<Visualizer 

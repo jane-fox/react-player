@@ -33,7 +33,7 @@ class Controls extends React.Component {
 						{byline}
 					</p>
 
-					<Volume audio={this.props.audio} />
+					<Volume audio={this.props.audio} change_volume={this.props.change_volume} />
 
 				</div>
 
@@ -75,6 +75,7 @@ class Volume extends React.Component {
 		};
 
 		this.toggle = this.toggle.bind(this);
+		this.render = this.render.bind(this);
 
 	}
 
@@ -89,7 +90,6 @@ class Volume extends React.Component {
 
 	}
 
-
 	render() {
 		let slider = null;
 		let icon = null;
@@ -99,14 +99,13 @@ class Volume extends React.Component {
 
 		// Decide whether to show pause or play button
 		if (this.state.open) {
-			slider = <VolumeSlider />;
+			slider = <VolumeSlider change={this.props.change_volume} audio={this.props.audio} />;
 			open_class = "open";
 		}
 
-
 		if ( volume <= 0) {
 			icon = <i className="mi mi-volume-off"></i>
-		} else if ( volume >= 50 ) {
+		} else if ( volume <= .50 ) {
 			icon = <i className="mi mi-volume-down"></i>
 		} else {
 			icon = <i className="mi mi-volume-up"></i>
@@ -130,18 +129,20 @@ class Volume extends React.Component {
 
 
 // Input to control value, with hint icons
-function VolumeSlider() {
+function VolumeSlider(props) {
+
 	return (
 		<div className="volume-slider">
-			<i className="mi mi-volume-up"></i>
+			<i className="mi mi-volume-mute"></i>
 			<input 
-				defaultValue="1"
+				defaultValue={props.audio.volume}
 				type="range" 
 				min="0" 
 				max="1" 
 				step=".01"
+				onChange={props.change}
 			/>
-			<i className="mi mi-volume-down"></i>
+			<i className="mi mi-volume-up"></i>
 		</div>
 	);
 }
