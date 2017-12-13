@@ -251,8 +251,9 @@ class Radio extends React.Component {
 
 		if ( new_volume >= 0 ) {
 			//console.log("Changing volume to ", new_volume);
-			this.state.audio.volume = new_volume;
-			this.setState({audio: this.state.audio});
+			var audio = this.state.audio;
+			audio.volume = new_volume;
+			this.setState({audio: audio});
 		}
 	}
 

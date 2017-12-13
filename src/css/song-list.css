@@ -2,6 +2,9 @@
 
 .song-list {
   background-color: rgba(0,0,0,.1);
+  overflow-y: scroll;
+  position: relative;
+
 }
 
 
@@ -14,7 +17,11 @@
 
 .song.heading {
   font-weight: bold;
+
 }
+
+
+
 
 .song {
   height: 65px;

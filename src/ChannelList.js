@@ -16,10 +16,10 @@ function ChannelList(props) {
     list.push(
       <li key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
         <img src={channel.image} alt={channel.title} />
-        <h3>{channel.title}</h3>
+        <h4 className="title">{channel.title}</h4>
         <p className="description">{channel.description}</p>
         <span className="genre">{channel.genre}</span>
-        <div>{channel.listeners} listeners</div>
+        <div className="listeners">{channel.listeners} listeners</div>
       </li>
     );
   })

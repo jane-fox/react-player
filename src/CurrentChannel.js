@@ -17,19 +17,14 @@ class CurrentChannel extends React.Component {
 			return (
 				<section className="current-channel">
 
-					<h3>You are currently tuned into</h3>
+					<h2 className="title">
+						You're tuned in to {this.props.current_channel.title} on &nbsp;
+						<a href="http://somafm.com" target="_blank">SomaFM</a>
+					</h2>
 
-					<div className="">
 
-						<img 
-							src={this.props.current_channel.image}
-							alt={this.props.current_channel.title}
-						/>
-						<h4>{this.props.current_channel.title}</h4>
-						<p>{this.props.current_channel.description}</p>
-						<p>{this.props.current_channel.genre}</p>
-						<div className="clearfix"> </div>
-					</div>
+
+					<p className="above-bar">Now Playing</p>
 
 				</section>
 				);
