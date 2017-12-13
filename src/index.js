@@ -16,7 +16,7 @@ import CurrentChannel from "./CurrentChannel";
 import DisplayControl from "./DisplayControl";
 
 
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 
 /*
@@ -317,6 +317,6 @@ class Radio extends React.Component {
 
 
 
-registerServiceWorker();
+//registerServiceWorker();
 
 ReactDOM.render(<Radio />, document.getElementById('root'));
