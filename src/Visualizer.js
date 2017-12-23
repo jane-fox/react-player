@@ -110,7 +110,7 @@ class Visualizer extends React.Component {
 				barHeight = this.state.dataArray[i]/2 ;
 
 				//ctx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-				ctx.fillStyle = '#224488';
+				ctx.fillStyle = '#6050f0';
 				ctx.fillRect(x, 0, barWidth, barHeight );
 
 				x += barWidth + spacing;
