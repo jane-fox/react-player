@@ -4,13 +4,13 @@
 	padding: 0px;
 	padding-left: 130px;
 	padding-right: 50px;
-	background-color: #248;
+	background-color: #6050f0;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
 
 
-	color: #000;
+	color: #59505f;
 	/*
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
@@ -37,7 +37,8 @@
 .play-button {
 
 	border: 0;
-	background-color: #248;
+	background-color: #6050f0;
+	color: #59505f;
 	border-radius: 100px;
 	cursor: pointer;
 	outline: none;
@@ -76,7 +77,6 @@
 	right: 0px;
 	top: 0px;
 
-
 }
 
 .volume-container button {
@@ -87,15 +87,19 @@
 
 	border: none;
 	outline: none;
+
 	background: transparent;
 	background-color: transparent;
+
+	color: #59505f;
+
 	transition: .5s;
 	cursor: pointer;
 }
 
 .volume-container button:hover, .volume-container.open button {
 	color: #FFF;
-	background-color: rgba(0,0,0,.5);
+	background-color: #59505f;
 }
 
 
@@ -109,8 +113,8 @@
 
 	display: flex;
 
-	background-color: rgba(0,0,0,.5);
-	color: #FFF;
+	background-color: #59505f;
+	color: #fff;
 
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
