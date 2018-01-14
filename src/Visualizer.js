@@ -101,8 +101,8 @@ class Visualizer extends React.Component {
 			var x = 0;
 			var spacing = 1;
 
-
 			this.state.analyser.getByteFrequencyData(this.state.dataArray);
+
 
 
 
