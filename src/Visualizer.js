@@ -83,6 +83,13 @@ class Visualizer extends React.Component {
 	// Draw visualizer
 	draw() {
 
+		function get_canvas() {
+			var canvas = this.state.canvas;
+			if (canvas) {
+				var ctx = canvas.getContext("2d");
+			}
+		}
+		
 		var canvas = this.state.canvas;
 
 		if (canvas) {
@@ -106,7 +113,7 @@ class Visualizer extends React.Component {
 
 
 
-			for(var i = 0; i < this.state.bufferLength; i++) {
+			for(var i = 0; i < this.state.bufferLength; i+=2) {
 				barHeight = this.state.dataArray[i]/2 ;
 
 				//ctx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';

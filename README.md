@@ -1,11 +1,25 @@
 
-This plays SomaFM
+# React SomaFM Player
+
+https://somafm.com
+
+Unofficial player, but streams from the same source. 
+
+Thank you Soma for running such an awesome, ad-free radio <3
 
 
-npm install -g create-react-app
+## Set up & Run
 
-npm install
+Clone the repo and open it up in a terminal.
 
-if you're on linux make sure your node is up to date,
-the apt repository is still at like version 4
+`npm install -g create-react-app`
+
+`npm install`
+
+If you're on linux make sure your node is up to date, the apt repository is still at like version 4!
+
+Includes a neat little visualizer thing.
+
+
+Original player here: https://github.com/jmonta01/somafm-webplayer - Thanks for keeping it open source, Jason!
 
