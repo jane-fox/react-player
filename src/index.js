@@ -1,45 +1,20 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from "axios";
+
+import "material-icons";
 import './css/index.css';
 import './css/icon.css';
 import './css/material-icons.min.css';
 import './data.js';
-import axios from "axios";
-import "material-icons";
 
 import ChannelList from "./ChannelList";
 import SongList from "./SongList";
-
 import Visualizer from "./Visualizer";
 import Controls from "./Controls";
 import CurrentChannel from "./CurrentChannel";
 import DisplayControl from "./DisplayControl";
-
-
-//import registerServiceWorker from './registerServiceWorker';
-
-
-/*
-"id": "7soul",
-	"title": "Seven Inch Soul",
-	"description": "Vintage soul tracks from the original 45 RPM vinyl.",
-	"dj": "Dion Watts Garcia",
-	"djmail": "dion@somafm.com",
-	"genre": "oldies",
-	"image": "https://api.somafm.com/img/7soul120.png",
-	"largeimage": "https://api.somafm.com/logos/256/7soul256.png",
-	"xlimage": "https://api.somafm.com/logos/512/7soul512.png",
-	"twitter": "SevenInchSoul",
-	"updated": "1396144686",
-	"playlists": [
-		{ "url": "https://api.somafm.com/7soul130.pls", "format": "aac",  "quality": "highest" },
-		{ "url": "https://api.somafm.com/7soul.pls", "format": "mp3",  "quality": "high" },
-		{ "url": "https://api.somafm.com/7soul64.pls", "format": "aacp",  "quality": "high" },
-		{ "url": "https://api.somafm.com/7soul32.pls", "format": "aacp",  "quality": "low" }
-	],
-	"listeners": "80",
-	"lastPlaying": "The Dells - Your Song"
-*/
 
 
 
@@ -48,7 +23,6 @@ class Radio extends React.Component {
 
 	constructor(props) {
 		super(props);
-
 
 		this.state = {
 			channels: window.channels.channels,
@@ -93,6 +67,8 @@ class Radio extends React.Component {
     }
 
     componentDidMount() {
+
+    	setInterval(this.update_songs, 5000);
        /* ReactDOM.render(
 			,
 			this.refs.controls
@@ -104,7 +80,6 @@ class Radio extends React.Component {
 
 		var self = this;
 
-
 		// Search channels for matching id
 		var new_channel = this.state.channels.find(
 			channel => channel.id === channel_id
@@ -115,10 +90,8 @@ class Radio extends React.Component {
 		var playlist = new_channel.playlists.find(
 			list => list.quality === "high"
 		);
+		//console.log(playlist);
 
-
-
-		console.log(playlist);
 
 		axios.get(playlist.url)
 			.then(function (response) {
@@ -312,12 +285,11 @@ class Radio extends React.Component {
 	 			
 		  </main>
 		);
+		
 	} // render
 
 } // Radio
 
 
-
-//registerServiceWorker();
-
-ReactDOM.render(<Radio />, document.getElementById('root'));
+// Render the radio on load.
+ReactDOM.render(<Radio />, document.getElementById('radio'));

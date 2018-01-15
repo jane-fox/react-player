@@ -18,7 +18,7 @@ function SongList(props) {
         <span className="date">{song.date}</span>
       </li>
     );
-  })
+  });
 
 
 

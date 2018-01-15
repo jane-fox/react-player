@@ -19,15 +19,13 @@ class CurrentChannel extends React.Component {
 
 					<h2 className="title">
 						You're tuned in to {this.props.current_channel.title} on &nbsp;
-						<a href="http://somafm.com" target="_blank">SomaFM</a>
+						<a href="http://somafm.com" target="_blank" rel="noopener noreferrer">SomaFM</a>
 					</h2>
-
-
 
 					<p className="above-bar">Now Playing</p>
 
 				</section>
-				);
+			);
 		}
 
 	} // render

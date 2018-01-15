@@ -51,13 +51,19 @@ class Visualizer extends React.Component {
 
 		this.draw();
 
+		window.addEventListener("resize", this.size_player, false);
+
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.size_player, false);
 	}
 
 	// Change size of canvas
 	size_player() {
 
-
-		var canvas = ReactDOM.findDOMNode(this.refs.canvas);
+		console.log("resizing");
+		var canvas = this.state.canvas
 
 		if (canvas) {
 
@@ -83,13 +89,7 @@ class Visualizer extends React.Component {
 	// Draw visualizer
 	draw() {
 
-		function get_canvas() {
-			var canvas = this.state.canvas;
-			if (canvas) {
-				var ctx = canvas.getContext("2d");
-			}
-		}
-		
+
 		var canvas = this.state.canvas;
 
 		if (canvas) {
@@ -112,8 +112,7 @@ class Visualizer extends React.Component {
 
 
 
-
-			for(var i = 0; i < this.state.bufferLength; i+=2) {
+			for(var i = 0; i < this.state.bufferLength; i++) {
 				barHeight = this.state.dataArray[i]/2 ;
 
 				//ctx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
@@ -122,6 +121,7 @@ class Visualizer extends React.Component {
 
 				x += barWidth + spacing;
 			}
+
 
 		}
 

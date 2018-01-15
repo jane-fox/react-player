@@ -53,6 +53,7 @@ function PlayButton(props) {
 	);
 }
 
+
 function PauseButton(props) {
 	return (
 		<button className="play-button" onClick={props.pause}>
@@ -60,8 +61,6 @@ function PauseButton(props) {
 		</button>
 	);	
 }
-
-
 
 
 
@@ -149,5 +148,4 @@ function VolumeSlider(props) {
 
 
 export default Controls;
-
 
