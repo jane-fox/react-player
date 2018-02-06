@@ -23,3 +23,8 @@ Includes a neat little visualizer thing.
 
 Original player here: https://github.com/jmonta01/somafm-webplayer - Thanks for keeping it open source, Jason!
 
+## Design 
+
+The design is a work in progress, see my current mockup on figma
+https://www.figma.com/file/MCEGKF7kDNb3cTzTW9LNGXG7/react-player
+
