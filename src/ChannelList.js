@@ -1,7 +1,5 @@
-import React from 'react';
+import React from "react";
 import "./data.js";
-
-
 
 /*
 "id": "7soul",
@@ -25,44 +23,43 @@ import "./data.js";
   "lastPlaying": "The Dells - Your Song"
 */
 
-
 //http://somafm.com/channels.json
 
 function ChannelList(props) {
+	const list = [];
 
-  const list = [];
+	//console.log(props);
 
-  //console.log(props);
+	props.channels.forEach(function(channel) {
+		list.push(
+			<li
+				key={channel.id}
+				className="channel"
+				onClick={change_channel}
+				data-id={channel.id}
+			>
+				<img src={channel.image} alt={channel.title} />
+				<h4 className="title">{channel.title}</h4>
+				<p className="description">{channel.description}</p>
+				<span className="genre">{channel.genre}</span>
+				<div className="listeners">{channel.listeners} listeners</div>
+			</li>
+		);
+	});
 
-  props.channels.forEach(function(channel) {
-    list.push(
-      <li key={channel.id} className="channel" onClick={change_channel} data-id={channel.id}>
-        <img src={channel.image} alt={channel.title} />
-        <h4 className="title">{channel.title}</h4>
-        <p className="description">{channel.description}</p>
-        <span className="genre">{channel.genre}</span>
-        <div className="listeners">{channel.listeners} listeners</div>
-      </li>
-    );
-  })
+	function change_channel(click) {
+		// Get the data-id of the clicked channel
+		var channel = click.currentTarget.getAttribute("data-id");
 
-  function change_channel(click) {
+		// Use parent function to update channel state
+		props.change_channel(channel);
+	}
 
-    // Get the data-id of the clicked channel
-    var channel = click.currentTarget.getAttribute("data-id");
-
-    // Use parent function to update channel state
-    props.change_channel(channel);
-
-  }
-
-  return (
-    <section className="channel-list">
-
-      <ul>{list}</ul>
-
-    </section>
-  );
+	return (
+		<section className="channel-list">
+			<ul>{list}</ul>
+		</section>
+	);
 }
 
 export default ChannelList;

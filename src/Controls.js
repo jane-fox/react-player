@@ -1,9 +1,7 @@
-import React from 'react';
-import './css/controls.css';
-
+import React from "react";
+import "./css/controls.css";
 
 class Controls extends React.Component {
-
 	render() {
 		let button = null;
 		let byline = "";
@@ -20,12 +18,9 @@ class Controls extends React.Component {
 			byline = " - by " + this.props.current_song.artist;
 		}
 
-
 		return (
 			<section>
-
 				<div className="stripe">
-
 					{button}
 
 					<p className="current-song">
@@ -33,60 +28,51 @@ class Controls extends React.Component {
 						{byline}
 					</p>
 
-					<Volume audio={this.props.audio} change_volume={this.props.change_volume} />
-
+					<Volume
+						audio={this.props.audio}
+						change_volume={this.props.change_volume}
+					/>
 				</div>
-
 			</section>
 		);
 	}
-
-
-} 
-
+}
 
 function PlayButton(props) {
 	return (
 		<button className="play-button" onClick={props.play}>
-			<i className="mi mi-play-circle-outline"></i>
+			<i className="mi mi-play-circle-outline" />
 		</button>
 	);
 }
 
-
 function PauseButton(props) {
 	return (
 		<button className="play-button" onClick={props.pause}>
-			<i className="mi mi-pause-circle-outline"></i>
+			<i className="mi mi-pause-circle-outline" />
 		</button>
-	);	
+	);
 }
 
-
-
 class Volume extends React.Component {
-
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			open: false,
+			open: false
 		};
 
 		this.toggle = this.toggle.bind(this);
 		this.render = this.render.bind(this);
-
 	}
 
 	// Open / Close the volume slider
 	toggle() {
-
 		if (this.state.open) {
-			this.setState({open: false});
+			this.setState({ open: false });
 		} else {
-			this.setState({open: true});
+			this.setState({ open: true });
 		}
-
 	}
 
 	render() {
@@ -95,57 +81,51 @@ class Volume extends React.Component {
 		let volume = this.props.audio.volume;
 		let open_class = null;
 
-
 		// Decide whether to show pause or play button
 		if (this.state.open) {
-			slider = <VolumeSlider change={this.props.change_volume} audio={this.props.audio} />;
+			slider = (
+				<VolumeSlider
+					change={this.props.change_volume}
+					audio={this.props.audio}
+				/>
+			);
 			open_class = "open";
 		}
 
-		if ( volume <= 0) {
-			icon = <i className="mi mi-volume-off"></i>
-		} else if ( volume <= .50 ) {
-			icon = <i className="mi mi-volume-down"></i>
+		if (volume <= 0) {
+			icon = <i className="mi mi-volume-off" />;
+		} else if (volume <= 0.5) {
+			icon = <i className="mi mi-volume-down" />;
 		} else {
-			icon = <i className="mi mi-volume-up"></i>
+			icon = <i className="mi mi-volume-up" />;
 		}
-
 
 		return (
 			<div className={"volume-container " + open_class}>
-				<button onClick={this.toggle}>
-					{icon}
-				</button>
-				
-				{slider}
+				<button onClick={this.toggle}>{icon}</button>
 
+				{slider}
 			</div>
 		);
 	}
-
-
-} 
-
+}
 
 // Input to control value, with hint icons
 function VolumeSlider(props) {
-
 	return (
 		<div className="volume-slider">
-			<i className="mi mi-volume-mute"></i>
-			<input 
+			<i className="mi mi-volume-mute" />
+			<input
 				defaultValue={props.audio.volume}
-				type="range" 
-				min="0" 
-				max="1" 
+				type="range"
+				min="0"
+				max="1"
 				step=".01"
 				onChange={props.change}
 			/>
-			<i className="mi mi-volume-up"></i>
+			<i className="mi mi-volume-up" />
 		</div>
 	);
 }
 
-
 export default Controls;
-
